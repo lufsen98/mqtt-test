@@ -1,4 +1,4 @@
-FROM balenalib/rpi-debian
+FROM balenalib/raspberrypi5-debian:bookworm
 #Pass these when buildning
 ARG USERNAME
 ARG PASSWORD
@@ -31,6 +31,6 @@ RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/
 
 RUN echo "locales locales/default_environment_locale select sv_SE.UTF-8" | debconf-set-selections && \
     echo "locales locales/locales_to_be_generated select sv_SE.UTF-8 UTF-8" | debconf-set-selections
-RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
+# RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
 
 CMD ["/bin/bash", "-c", "service ssh start && tail -f /dev/null"]

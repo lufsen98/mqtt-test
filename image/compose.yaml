@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  rpi-zero-dev:
+    build:
+      context: .
+      args:
+        USERNAME: ${USERNAME}
+        PASSWORD: ${PASSWORD}
+    image: rpi-zero-dev:latest
+    container_name: rpi-zero-dev
+    environment:
+      - USERNAME=${USERNAME}
+      - PASSWORD=${PASSWORD}
+      - TZ=UTC
+      - LANG=sv_SE.UTF-8
+      - LC_ALL=sv_SE.UTF-8
+    ports:
+      - "2222:22"
+      - "1883:1883"
+    volumes:
+      - ./app:/app
+    restart: unless-stopped
+
